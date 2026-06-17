@@ -36,7 +36,7 @@ export function CatererFilters({
               placeholder="E.g. The Gourmet Kitchen..."
               value={search}
               onChange={(event) => onSearchChange(event.target.value)}
-              className="h-11 rounded-xl bg-background/50 pl-9 shadow-sm transition-all focus-within:border-gray-700"
+              className="h-11 rounded-xl bg-background/50 pl-9 shadow-sm transition-all focus-visible:border-primary focus-visible:ring-0 focus-visible:outline-none"
             />
           </div>
         </div>

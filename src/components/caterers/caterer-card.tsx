@@ -11,10 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "@/lib/format";
 import type { Caterer } from "@/types/caterer";
 
-export function CatererCard({ caterer }: { caterer: Caterer }) {
+export function CatererCard({ caterer, index = 0 }: { caterer: Caterer, index?: number }) {
   return (
-    <Card className="glass-panel group relative h-full overflow-hidden border-border/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    <Card
+      className="glass-panel animate-fade-in-up border-none! group relative h-full overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/20"
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <CardHeader className="relative pb-4">
         <div className="flex items-start justify-between gap-3">
           <CardTitle className="text-xl tracking-tight font-bold transition-colors group-hover:text-primary line-clamp-1">
@@ -39,7 +42,7 @@ export function CatererCard({ caterer }: { caterer: Caterer }) {
         ))}
       </CardContent>
 
-      <CardFooter className="relative mt-auto border-t border-border/50 pt-4 justify-between bg-muted/20">
+      <CardFooter className="relative mt-auto border-t border-white/5 pt-4 justify-between bg-background/20 backdrop-blur-xl">
         <span className="text-sm font-medium text-muted-foreground">Price per plate</span>
         <span className="text-lg font-bold text-foreground">
           {formatPrice(caterer?.pricePerPlate)}
