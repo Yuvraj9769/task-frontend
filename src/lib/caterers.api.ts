@@ -4,6 +4,7 @@ import type { ApiResponse, Caterer } from "@/types/caterer";
 export interface CatererFilters {
   search?: string;
   maxPrice?: number;
+  sortOrder?: string
 }
 
 export async function getCaterers(
@@ -16,6 +17,8 @@ export async function getCaterers(
     if (filters?.search?.trim()) params.search = filters.search;
     
     if (filters.maxPrice !== undefined) params.maxPrice = filters.maxPrice;
+
+    if(filters.sortOrder?.trim()) params.sortOrder = filters.sortOrder;
 
     const { data } = await apiClient.get<ApiResponse<Caterer[]>>("/caterers", {
       params,

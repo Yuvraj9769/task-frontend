@@ -11,23 +11,27 @@ const MAX_PRICE_LIMIT = 2000;
 
 export function CaterersContent() {
   const [search, setSearch] = useState("");
-
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE_LIMIT);
+  const [sort, setSort] = useState("");
 
   const debouncedSearch = useDebounce(search?.trim());
 
   const debouncedMaxPrice = useDebounce(maxPrice);
+
+  const debounceSortOrder = useDebounce(sort?.trim())
 
   const filters = useMemo(
     () => ({
       search: debouncedSearch.trim() || undefined,
       maxPrice:
         debouncedMaxPrice < MAX_PRICE_LIMIT ? debouncedMaxPrice : undefined,
+      sortOrder: debounceSortOrder?.trim() ?? undefined
     }),
-    [debouncedSearch, debouncedMaxPrice],
+    [debouncedSearch, debouncedMaxPrice, debounceSortOrder],
   );
 
   const { caterers, isLoading, error } = useCaterers(filters);
+
 
   return (
     <div className="space-y-6">
@@ -37,6 +41,9 @@ export function CaterersContent() {
         maxPrice={maxPrice}
         priceLimit={MAX_PRICE_LIMIT}
         onMaxPriceChange={setMaxPrice}
+        sort={sort}
+        onSortChange={setSort}
+
       />
 
       <CatererGrid caterers={caterers} isLoading={isLoading} error={error} />

@@ -13,11 +13,12 @@ interface UseCaterersResult {
 export function useCaterers({
   search,
   maxPrice,
+  sortOrder
 }: CatererFilters): UseCaterersResult {
   
   const { data, error, isLoading } = useQuery({
-    queryKey: ["caterers", search ?? "", maxPrice ?? null],
-    queryFn: () => getCaterers({ search, maxPrice }),
+    queryKey: ["caterers", search ?? "", maxPrice ?? null, sortOrder ?? ""],
+    queryFn: () => getCaterers({ search, maxPrice, sortOrder }),
     placeholderData: (previousData) => previousData,
   });
 
